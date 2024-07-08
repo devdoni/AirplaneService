@@ -1,186 +1,225 @@
 import React, { useState } from "react";
-import Home from './Home';
+import Home from "./Home";
 import SignUp from "./member/SignUp";
 import SignIn from "./member/SignIn";
 import Modify from "./member/Modify";
-import Memo from './memo/Memo';
-import MemoList from './memo/MemoList';
-
-
+import Memo from "./memo/Memo";
+import MemoList from "./memo/MemoList";
+import { getLoginedSessionID, setLoginedSessionID,  } from './session.js'
 
 const Menubar = () => {
 
     // hook
     const [isHome, setIsHome] = useState(true);
-    const [isSignUp, setSignUp] = useState(false);
-    const [isSignIn, setSignIn] = useState(false);
+    const [isSignUp, setIsSignUp] = useState(false);
+    const [isSignIn, setIsSignIn] = useState(false);
     const [isModify, setIsModify] = useState(false);
     const [isMemo, setIsMemo] = useState(false);
     const [isMemoList, setIsMemoList] = useState(false);
 
     const [isLogined, setIsLogined] = useState(false);
 
-    // Handler
+    // handler
+    const homeClickHandelr = () => {
+        console.log('homeClickHandelr()');
+        
+        setIsHome(true);
+        setIsSignUp(false);
+        setIsSignIn(false);
+        setIsModify(false);
+        setIsMemo(false);
+        setIsMemoList(false);
 
-    const homeClickHandler = () => {
-        console.log('homeClickHandler()');
+    }
+
+    const signUpClickHandelr = () => {
+        console.log('signUpClickHandelr()');
+        
+        setIsHome(false);
+        setIsSignUp(true);
+        setIsSignIn(false);
+        setIsModify(false);
+        setIsMemo(false);
+        setIsMemoList(false);
+
+    }
+
+    const signInClickHandelr = () => {
+        console.log('signInClickHandelr()');
+        
+        setIsHome(false);
+        setIsSignUp(false);
+        setIsSignIn(true);
+        setIsModify(false);
+        setIsMemo(false);
+        setIsMemoList(false);
+
+    }
+
+    const signOutClickHandelr = () => {
+        console.log('signOutClickHandelr()');
+
+        setLoginedSessionID();      // session change
 
         setIsHome(true);
-        setSignUp(false);
-        setSignIn(false);
+        setIsSignUp(false);
+        setIsSignIn(false);
         setIsModify(false);
         setIsMemo(false);
         setIsMemoList(false);
 
+        setIsLogined(false);        // menu change
+        
     }
 
-    const signUpClickHandler = () => {
-        console.log('signUpClickHandler()');
+    const modifyClickHandelr = () => {
+        console.log('modifyClickHandelr()');
 
         setIsHome(false);
-        setSignUp(true);
-        setSignIn(false);
-        setIsModify(false);
-        setIsMemo(false);
-        setIsMemoList(false);
-
-    }
-
-    const signInClickHandler = () => {
-        console.log('signInClickHandler()');
-
-        setIsHome(false);
-        setSignUp(false);
-        setSignIn(true);
-        setIsModify(false);
-        setIsMemo(false);
-        setIsMemoList(false);
-
-    }
-
-    const signOutClickHandler = () => {
-        console.log('signOutClickHandler()');
-
-        setIsHome(true);
-        setSignUp(false);
-        setSignIn(false);
-        setIsModify(false);
-        setIsMemo(false);
-        setIsMemoList(false);
-
-    }
-    const modifyClickHandler = () => {
-        console.log('modifyClickHandler()');
-
-        setIsHome(false);
-        setSignUp(false);
-        setSignIn(false);
+        setIsSignUp(false);
+        setIsSignIn(false);
         setIsModify(true);
         setIsMemo(false);
         setIsMemoList(false);
-    }
-
-    const memoClickHandler = () => {
-        console.log('memoClickHandler()');
-
-        setIsHome(false);
-        setSignUp(false);
-        setSignIn(false);
-        setIsModify(false);
-        setIsMemo(true);
-        setIsMemoList(false);
 
     }
 
-    const memolistClickHandler = () => {
-        console.log('memolistClickHandler()');
+    const memoClickHandelr = () => {
+        console.log('memoClickHandelr()');
+        
+        if(getLoginedSessionID() === '')
+        {
+            alert('로그인을 해주세요');
+            setIsHome(false);
+            setIsSignUp(false);
+            setIsSignIn(true);
+            setIsModify(false);
+            setIsMemo(false);
+            setIsMemoList(false);   
+        } else {
+            setIsHome(false);
+            setIsSignUp(false);
+            setIsSignIn(false);
+            setIsModify(false);
+            setIsMemo(true);
+            setIsMemoList(false);
+        }
 
-        setIsHome(false);
-        setSignUp(false);
-        setSignIn(false);
-        setIsModify(false);
-        setIsMemo(false);
-        setIsMemoList(true);
+    }
 
+    const memoListClickHandelr = () => {
+        console.log('memoListClickHandelr()');
+
+        if(getLoginedSessionID() === '')
+            {
+                alert('로그인을 해주세요');
+                setIsHome(false);
+                setIsSignUp(false);
+                setIsSignIn(true);
+                setIsModify(false);
+                setIsMemo(false);
+                setIsMemoList(false);   
+            } else {
+                setIsHome(false);
+                setIsSignUp(false);
+                setIsSignIn(false);
+                setIsModify(false);
+                setIsMemo(false);
+                setIsMemoList(true);
+            }
+
+        
     }
 
     return(
         <div id="menubar">
             <div className="menus">
-                <a href="#none" onClick={homeClickHandler}>HOME</a>
+                <a href="#none" onClick={homeClickHandelr}>home</a>
                 {
                     isLogined
                     ?
                     <>
-                    <a href="#none" onClick={signOutClickHandler}>SIGN-OUT</a>
-                    <a href="#none" onClick={modifyClickHandler}>MODIFY</a>
+                        <a href="#none" onClick={signOutClickHandelr}>sign-out</a>
+                        <a href="#none" onClick={modifyClickHandelr}>modify</a>
                     </>
                     :
                     <>
-                    <a href="#none" onClick={signUpClickHandler}>SIGN-UP</a>
-                    <a href="#none" onClick={signInClickHandler}>SIGN-IN</a>
+                        <a href="#none" onClick={signUpClickHandelr}>sign-up</a>
+                        <a href="#none" onClick={signInClickHandelr}>sign-in</a>
                     </>
-                }
 
- 
-                <a href="#none" onClick={memoClickHandler}>MEMO</a>
-                <a href="#none" onClick={memolistClickHandler}>MEMO-LIST</a>
+                }
+                <a href="#none" onClick={memoClickHandelr}>memo</a>
+                <a href="#none" onClick={memoListClickHandelr}>memo-list</a>
             </div>
             {
-                isHome 
+                isHome
                 ?
                     <Home />
                 :
                 null
             }
+
             {
                 isSignUp
                 ?
                     <SignUp 
-                        homeViewer={setIsHome}
-                        signUpViewer={setSignUp}
-                        signInViewer={setSignIn}
-                        MemoViewer={setIsMemo}
-                        MemoListViewer={setIsMemoList}
+                        homeViewer={setIsHome} 
+                        signUpViewer={setIsSignUp} 
+                        signInViewer={setIsSignIn} 
+                        memoViewer={setIsMemo} 
+                        memoListViewer={setIsMemoList} 
                     />
                 :
                 null
             }
+
             {
                 isSignIn
                 ?
                     <SignIn 
-                    homeViewer={setIsHome}
-                    signUpViewer={setSignUp}
-                    signInViewer={setSignIn}
-                    MemoViewer={setIsMemo}
-                    MemoListViewer={setIsMemoList}
-                    changeMenubar={setIsLogined}
+                        homeViewer={setIsHome} 
+                        signUpViewer={setIsSignUp} 
+                        signInViewer={setIsSignIn} 
+                        memoViewer={setIsMemo} 
+                        memoListViewer={setIsMemoList} 
+                        changeMenuBar={setIsLogined}                        
                     />
                 :
                 null
             }
+
             {
                 isModify
                 ?
                     <Modify 
-                    homeViewer={setIsHome}
-                    signUpViewer={setSignUp}
-                    signInViewer={setSignIn}
-                    ModifyViewer={setIsModify}
-                    MemoViewer={setIsMemo}
-                    MemoListViewer={setIsMemoList} 
+                        homeViewer={setIsHome} 
+                        signUpViewer={setIsSignUp} 
+                        signInViewer={setIsSignIn} 
+                        modifyViewer={setIsModify}
+                        memoViewer={setIsMemo} 
+                        memoListViewer={setIsMemoList}
+                        changeMenuBar={setIsLogined}    
                     />
                 :
                 null
             }
+
             {
                 isMemo
                 ?
-                    <Memo />
+                    <Memo 
+                    homeViewer={setIsHome} 
+                    signUpViewer={setIsSignUp} 
+                    signInViewer={setIsSignIn} 
+                    modifyViewer={setIsModify}
+                    memoViewer={setIsMemo} 
+                    memoListViewer={setIsMemoList} 
+                    />
                 :
                 null
             }
+            
             {
                 isMemoList
                 ?
@@ -188,6 +227,7 @@ const Menubar = () => {
                 :
                 null
             }
+
         </div>
     );
 }

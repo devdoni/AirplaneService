@@ -1,16 +1,16 @@
-let loginedSessionID= '';
+let loginedSessionID = '';
 
 // getter & setter 함수
-
 export const setLoginedSessionID = (id = '') => {
-    console.log('setLoginedSessionID()')
+    console.log('setLoginedSessionID()');
 
     loginedSessionID = id;
+
 }
 
-export const getLoginedSessionID = (id) => {
-    console.log('getLoginedSessionID()')
-
+export const getLoginedSessionID = () => {
+    console.log('getLoginedSessionID()');
+    
     return loginedSessionID;
 
 }

@@ -1,11 +1,12 @@
 import React from "react";
 
-const Home = () => {
+const ToDoList = () => {
     return(
         <>
-            This page is Home.
+            ToDoList
         </>
+
     );
 }
 
-export default Home;
+export default ToDoList;

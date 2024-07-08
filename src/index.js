@@ -13,11 +13,11 @@ import reportWebVitals from './reportWebVitals';
 
 // 이거 다시import Wrap from './airplaneservice/Wrap'
 
-import App from './memoservice/App'
+import Wrap from './myToDoList/Wrap';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 //  <React.StrictMode>
-    <App />
+    <Wrap />
 //  </React.StrictMode>
 );
 

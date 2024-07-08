@@ -1,11 +1,12 @@
 import React from "react";
 
-const Home = () => {
+const Modify = () => {
     return(
         <>
-            This page is Home.
+            Modify
         </>
+
     );
 }
 
-export default Home;
+export default Modify;

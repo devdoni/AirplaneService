@@ -1,11 +1,13 @@
 import React from "react";
 
-const Home = () => {
+
+const Modal = () => {
     return(
         <>
-            This page is Home.
+            Modal
         </>
     );
 }
 
-export default Home;
+
+export default Modal;
