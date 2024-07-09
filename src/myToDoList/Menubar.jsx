@@ -32,8 +32,8 @@ const Menubar = (props) => {
                     isSignIned
                     ?
                     <>
-                        <Link to="/" onClick={signOutClickHandler}>SignOut</Link>
                         <Link to="/modify">Modify</Link>
+                        <Link to="/" onClick={signOutClickHandler}>SignOut</Link>
                     </>
                     :
                     <>    
@@ -43,7 +43,7 @@ const Menubar = (props) => {
 
                 }
                 <Link to="/todowrite">TodoWrite</Link>
-                <Link to="/todolist">TodoWrite</Link>
+                <Link to="/todolist">TodoList</Link>
                 <Link to="/adminsignin">Admin Mode</Link>
             </div>
             <Outlet />

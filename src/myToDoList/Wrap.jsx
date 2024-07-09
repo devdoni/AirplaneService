@@ -20,6 +20,7 @@ const Wrap = () => {
 
     // Hook
     const [isSignIned, setIsSignIned] = useState(false);
+    const [isAdminSignIned, setIsAdminSignIned] = useState(false);
 
     return(
         <BrowserRouter>
@@ -31,14 +32,14 @@ const Wrap = () => {
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/signup" element={<SignUp />}></Route>
                         <Route path="/signin" element={<SignIn setIsSignIned={setIsSignIned}/>}></Route>
-                        <Route path="/modify" element={<Modify />}></Route>
+                        <Route path="/modify" element={<Modify setIsSignIned={setIsSignIned}/>}></Route>
                         <Route path="/todowrite" element={<TodoWrite />}></Route>
                         <Route path="/todolist" element={<TodoList />}></Route>
-                        <Route path="/todomodify" element={<TodoModify />}></Route>
+                        <Route path="/todomodify/:uId/:todokey" element={<TodoModify />}></Route>
                         <Route path="/*" element={<NG />}></Route>
                     </Route>
-                    <Route element={<AdminMenubar />}>
-                        <Route path="/adminsignin" element={<AdminSignIn />}></Route>
+                    <Route element={<AdminMenubar isAdminSignIned={isAdminSignIned} setIsAdminSignIned={setIsAdminSignIned} />}>
+                        <Route path="/adminsignin"  element={<AdminSignIn setIsAdminSignIned={setIsAdminSignIned}/>}></Route>
                         <Route path="/adminmemberlist" element={<AdminMemberList />}></Route>
                     </Route>
 

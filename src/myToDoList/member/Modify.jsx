@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getMyInfo, } from '../js/utils'
-import { getLoginedSessionID} from '../js/session'
+import { getDateTime, 
+         getMyInfo, setMyInfo, 
+         getAllMemberInfo, getAllTodoInfo,
+         setTodoSvcMemberDB, setTodoSvcTodoDB,
+         } from '../js/utils'
+import { getLoginedSessionID, setLoginedSessionID } from '../js/session'
 
-const Modify = () => {
+const Modify = ( props ) => {
 
         //Hook 
         const [uId, setUId] = useState('');
@@ -56,9 +60,45 @@ const Modify = () => {
         const ModifyBtnClickHandler = () => {
             console.log('[Modify] ModifyBtnClickHandler()');
 
+            let myInfo = getMyInfo(getLoginedSessionID());      // 변경전(현재 나의) 나의 정보
+            myInfo.uPw = uPw;
+            myInfo.uMail = uMail;
+            myInfo.uPhone = uPhone;
+            myInfo.uModDate = getDateTime();                    // 나의 정보 업데이트
 
+            setMyInfo(getLoginedSessionID(), myInfo);           // DB 업데이트
+
+            alert('MODIFY SUCESS');
+
+            navigate('/');
         }
     
+        const DeleteBtnClickHandler = () => {
+            console.log('[Modify] DeleteBtnClickHandler');
+
+            if (window.confirm('Really')) {
+            //DELETE MEMBER
+            let allMemberInfo = getAllMemberInfo();
+            delete allMemberInfo[getLoginedSessionID()];
+            setTodoSvcMemberDB(allMemberInfo);
+            
+            //DELETE TODO
+            let allTodoInfo = getAllTodoInfo();
+            delete allTodoInfo[uId];
+            setTodoSvcTodoDB(allTodoInfo);
+
+            alert('Delete Success');
+
+            setLoginedSessionID();
+
+            props.setIsSignIned(false);
+
+            navigate('/')               // 화면전환       
+            } else {
+                alert('DELETE CANCLED');
+            }
+            
+        }
 
     return(
         <div className="modify">
@@ -72,6 +112,7 @@ const Modify = () => {
             <input className="txt-basic" type="text" value={uPhone} onChange={uPhoneChangeHandler} placeholder="INPUT USER PHONE"/>
             <br />
             <input className="btn-basic" type="button" onClick={ModifyBtnClickHandler} value="Modify"/>
+            <input className="btn-basic" type="button" onClick={DeleteBtnClickHandler} value="Delete"/>
         </div>
     );
 }

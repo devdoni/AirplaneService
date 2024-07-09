@@ -14,6 +14,7 @@ export const getTodoSvcMemberDB = () => {
 
 }
 
+
 export const setTodoSvcMemberDB = (mems) => {
     console.log('[utils] setTodoSvcMemberDB()');
 
@@ -43,6 +44,29 @@ export const setMyInfo = (uId, myinfo) => {
 
     setTodoSvcMemberDB(mems);
 }
+
+export const getAllMemberInfo = () => {
+    console.log('[utils] getAllMemberInfo()');
+
+    return JSON.parse(getTodoSvcMemberDB());
+
+}
+
+export const getAllTodoInfo = () => {
+    console.log('[utils] getAllTodoInfo()');
+
+    return JSON.parse(getTodoSvcTodoDB());
+}
+
+export const getTobeModifyiedTodo = (uId, key) => {
+    console.log('[utils] getTobeModifyiedTodo()');
+
+    
+    return getMyTodos(uId)[key];
+
+}
+
+
 
 // TODO
 export const getTodoSvcTodoDB = () => {
@@ -102,3 +126,32 @@ export const getDateTime = () => {
     return `${fullYear}/${month}/${date} ${hours}:${minutes}:${seconds}`;
 }
 
+export const replaceDateTime = (dateTime) => {
+    console.log('[utils] replaceDateTime() ');
+
+    return dateTime.replaceAll('/', '').replaceAll(' ', '').replaceAll(':', '');
+
+}
+
+export const convertMapToArray = (map) => {
+    console.log('[utils] covertMapToArray()');
+
+    let keys = Object.keys(map);
+
+    let arr = [];
+    for(let i = 0; i < keys.length; i++) {
+        let data = map[keys[i]];
+        data['key'] = keys[i];
+        arr.push(data);
+    }
+
+    return arr;
+
+}
+
+export const createRandNum = (min, max) => {
+    console.log('[utils] createRandNum');
+
+    return Math.floor(Math.random() * max) + min;
+    
+}
