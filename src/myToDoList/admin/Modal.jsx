@@ -109,12 +109,15 @@ const Modal = ({selectedUId,setIsModal}) => {
                                     <tr key={idx}>
                                         <td>
                                             {
-                                                todo.isComplete ? <b>Completed</b>: <b>Proceding</b>
+                                                console.log('-----------> ', todo.isComPlete)
+                                            }
+                                            {
+                                                todo.isComPlete ? <b>Completed</b>: <b>Proceding</b>
                                             }
                                         </td>
                                         <td>
                                             {
-                                                todo.isComplete 
+                                                todo.isComPlete 
                                                 ?
                                                     <s>{todo.todoExpirationDate}</s>
                                                 :
@@ -124,7 +127,7 @@ const Modal = ({selectedUId,setIsModal}) => {
                                         </td>
                                         <td>
                                             {
-                                                todo.isComplete
+                                                todo.isComPlete
                                                 ?
                                                     <s>{todo.key}</s>
                                                 :
@@ -134,7 +137,7 @@ const Modal = ({selectedUId,setIsModal}) => {
                                         </td>
                                         <td>
                                             {
-                                                todo.isComplete
+                                                todo.isComPlete
                                                 ?
                                                     <s>{todo.todoTxt}</s>
                                                 :
@@ -144,7 +147,7 @@ const Modal = ({selectedUId,setIsModal}) => {
                                         </td>
                                         <td>
                                             {
-                                                todo.isComplete
+                                                todo.isComPlete
                                                 ?
                                                     <s>{todo.todoRegDate}</s>
                                                 :
@@ -154,7 +157,7 @@ const Modal = ({selectedUId,setIsModal}) => {
                                         </td>
                                         <td>
                                             {
-                                                todo.isComplete
+                                                todo.isComPlete
                                                 ?
                                                     <s>{todo.todoModDate}</s>
                                                 :
